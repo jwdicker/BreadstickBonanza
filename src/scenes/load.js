@@ -1,3 +1,4 @@
+// Scene that loads all assets and sets global input devices
 class LoadScene extends Phaser.Scene {
     
     constructor() {

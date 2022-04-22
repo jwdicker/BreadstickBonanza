@@ -1,3 +1,4 @@
+// Scene where the game is played
 class Play extends Phaser.Scene {
 
     constructor() {

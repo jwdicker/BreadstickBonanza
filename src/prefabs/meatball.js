@@ -1,3 +1,4 @@
+// Class that handles meatball movement and stats
 class Meatball extends Phaser.GameObjects.Sprite {
 
     constructor(scene, posX, posY, texture){
