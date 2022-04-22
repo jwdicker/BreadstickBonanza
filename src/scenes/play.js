@@ -7,10 +7,14 @@ class Play extends Phaser.Scene {
     create() {
         // Background setup
         this.background = this.add.tileSprite(0, 0, game.config.width, game.config.height, "background").setOrigin(0, 0);
-        this.bgMovementSpeed = 3;
+
+        // Meatball setup
+        this.meatballs = new Meatball(this, Math.random() * game.config.width, 0, "meatball");
     }
 
     update() {
-        this.background.tilePositionY -= this.bgMovementSpeed;
+        this.background.tilePositionY -= bgMovementSpeed;
+
+        this.meatballs.update();
     }
 }
