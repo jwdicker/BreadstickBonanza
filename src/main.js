@@ -21,3 +21,9 @@ let game = new Phaser.Game(config);
 
 // Input handling
 let keyLeft, keyRight;
+
+// Initialization Constants
+const UIDistance = game.config.height / 45;
+const bgMovementSpeed = 3;
+const startingMeatballs = 2;
+const meatballSpeed = 5;
