@@ -14,7 +14,10 @@ const config = {
     width: 540,
     height: 960,
     autoCenter: true,
-    scene: [LoadScene]
+    scene: [LoadScene, Play]
 };
 
 let game = new Phaser.Game(config);
+
+// Input handling
+let keyLeft, keyRight;
