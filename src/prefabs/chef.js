@@ -7,11 +7,11 @@ class Chef extends Phaser.GameObjects.Sprite {
     }
 
     update() {
-        if(keyLeft.isDown) {
+        if(keyLeft.isDown && this.x > this.width / 2) {
             this.x -= playerSpeed;
         }
 
-        if(keyRight.isDown) {
+        if(keyRight.isDown && this.x < game.config.width - this.width / 2) {
             this.x += playerSpeed;
         }
     }

@@ -14,6 +14,10 @@ class Play extends Phaser.Scene {
 
         // Meatball setup
         this.meatballs = new Meatball(this, Math.random() * game.config.width, 0, "meatball");
+
+        // Input Setup
+        keyLeft = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
+        keyRight = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT);
     }
 
     update() {
@@ -22,9 +26,5 @@ class Play extends Phaser.Scene {
         this.player.update();
 
         this.meatballs.update();
-
-        if(Phaser.Input.Keyboard.JustDown(keyLeft)) {
-            console.log("foo");
-        }
     }
 }
