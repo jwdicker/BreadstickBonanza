@@ -10,7 +10,7 @@ class Play extends Phaser.Scene {
         this.background = this.add.tileSprite(0, 0, game.config.width, game.config.height, "background").setOrigin(0, 0);
 
         // Player setup
-        this.player = new Chef(this, game.config.width / 2, game.config.height - UIDistance, "chef");
+        this.player = new Chef(this, game.config.width / 2, game.config.height - UIDistance - 50, "chef");
 
         // Meatball setup
         this.meatballs = this.add.group({
