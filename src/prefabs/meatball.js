@@ -16,7 +16,6 @@ class Meatball extends Phaser.Physics.Arcade.Sprite {
         // Summons one ally once it's below a certain point such that they're evenly spaced
         if(!this.summonedAlly && this.y > (game.config.height / this.scene.maxMeatballs)) {
             this.summonedAlly = true;
-            debugger;
             this.scene.summonMeatball();
         }
 
