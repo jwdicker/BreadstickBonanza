@@ -5,6 +5,7 @@ class LoadScene extends Phaser.Scene {
         super("load");
     }
 
+    // Loads images
     preload() {
         this.load.image('chef','./assets/chef_back.png');
         this.load.image('meatball','./assets/meatball.png');
@@ -14,7 +15,6 @@ class LoadScene extends Phaser.Scene {
 
     create() {
         console.log("Loaded");
-        this.bg = this.add.tileSprite(0, 0, 540, 960, 'bg').setOrigin(0, 0);
 
         this.scene.start("play");
     }

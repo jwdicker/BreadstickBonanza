@@ -3,7 +3,7 @@ class Meatball extends Phaser.Physics.Arcade.Sprite {
 
     constructor(scene){
         // Physics sprite setup
-        super(scene, Math.random() * game.config.width, 0, "meatball");
+        super(scene, Math.random() * game.config.width, -UIDistance, "meatball");
         scene.add.existing(this);
         scene.physics.add.existing(this);
         this.setVelocityY(meatballSpeed);
@@ -16,6 +16,7 @@ class Meatball extends Phaser.Physics.Arcade.Sprite {
         // Summons one ally once it's below a certain point such that they're evenly spaced
         if(!this.summonedAlly && this.y > (game.config.height / this.scene.maxMeatballs)) {
             this.summonedAlly = true;
+            debugger;
             this.scene.summonMeatball();
         }
 
