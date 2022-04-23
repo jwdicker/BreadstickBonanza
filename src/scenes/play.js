@@ -8,6 +8,7 @@ class Play extends Phaser.Scene {
     create() {
         // Background setup
         this.background = this.add.tileSprite(0, 0, game.config.width, game.config.height, "background").setOrigin(0, 0);
+        this.endOGame = false;
 
         // Player setup
         this.player = this.physics.add.sprite(game.config.width / 2, 0, "chef").setOrigin(0, 0);
@@ -21,27 +22,41 @@ class Play extends Phaser.Scene {
         this.maxMeatballs = 3;
         this.summonMeatball();
 
+        // Collider setup
+        this.physics.world.addCollider(this.player, this.meatballs, this.gameEnd, null, this);
+
         // Input Setup
         keyLeft = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
         keyRight = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT);
     }
 
+    // Summons a new meatball at the top of the screen
     summonMeatball() {
         this.meatballs.add(new Meatball(this));
     }
 
+    // Handles what happens when the player hits a meatball
+    gameEnd() {
+        this.physics.world.pause();
+        console.log("game over");
+        this.endOGame = true;
+    }
+
     update() {
-        this.background.tilePositionY -= bgMovementSpeed;
+        if(!this.endOGame)
+        {
+            this.background.tilePositionY -= bgMovementSpeed;
 
-        // Player Movement
-        let playerVelocity = 0;
-        if(keyLeft.isDown) {
-            playerVelocity -= playerSpeed;
-        }
+            // Player Movement
+            let playerVelocity = 0;
+            if (keyLeft.isDown) {
+                playerVelocity -= playerSpeed;
+            }
 
-        if(keyRight.isDown) {
-            playerVelocity += playerSpeed;
+            if (keyRight.isDown) {
+                playerVelocity += playerSpeed;
+            }
+            this.player.setVelocityX(playerVelocity);   
         }
-        this.player.setVelocityX(playerVelocity);
     }
 }

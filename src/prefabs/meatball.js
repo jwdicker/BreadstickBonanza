@@ -7,6 +7,7 @@ class Meatball extends Phaser.Physics.Arcade.Sprite {
         scene.add.existing(this);
         scene.physics.add.existing(this);
         this.setVelocityY(meatballSpeed);
+        this.setImmovable(true);
 
         // Whether or not this meatball has summoned another meatball
         this.summonedAlly = false;
