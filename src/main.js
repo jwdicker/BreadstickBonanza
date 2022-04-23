@@ -8,12 +8,16 @@ console.log("Bar");
 // 
 // Sources: 
 // https://phaser.discourse.group/t/center-game-on-my-website/5921/3
+// https://github.com/nathanaltice/PaddleParkourP3
 
 const config = {
     type: Phaser.CANVAS,
     width: 540,
     height: 960,
     autoCenter: true,
+    physics: {
+        default: "arcade"
+    },
     scene: [LoadScene, Play]
 };
 
@@ -26,5 +30,5 @@ let keyLeft, keyRight;
 const UIDistance = game.config.height / 30;
 const bgMovementSpeed = 3;
 const startingMeatballs = 2;
-const meatballSpeed = 5;
+const meatballSpeed = 250;
 const playerSpeed = 4;

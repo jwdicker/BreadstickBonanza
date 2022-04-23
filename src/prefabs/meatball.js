@@ -1,17 +1,27 @@
 // Class that handles meatball movement and stats
-class Meatball extends Phaser.GameObjects.Sprite {
+class Meatball extends Phaser.Physics.Arcade.Sprite {
 
-    constructor(scene, posX, posY, texture){
-        super(scene, posX, posY, texture);
+    constructor(scene){
+        // Physics sprite setup
+        super(scene, Math.random() * game.config.width, 0, "meatball");
         scene.add.existing(this);
+        scene.physics.add.existing(this);
+        this.setVelocityY(meatballSpeed);
+
+        // Whether or not this meatball has summoned another meatball
+        this.summonedAlly = false;
     }
 
     update() {
-        this.y += meatballSpeed;
-        
+        // Summons one ally once it's below a certain point such that they're evenly spaced
+        if(!this.summonedAlly && this.y > (game.config.height / this.scene.maxMeatballs)) {
+            this.summonedAlly = true;
+            this.scene.summonMeatball();
+        }
+
+        // Kills itself once it is no longer useful
         if(this.y > game.config.height + this.height) {
-            this.y = -this.height;
-            this.x = Math.random() * game.config.width;
+            this.destroy();
         }
     }
 

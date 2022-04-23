@@ -13,18 +13,24 @@ class Play extends Phaser.Scene {
         this.player = new Chef(this, game.config.width / 2, game.config.height - UIDistance, "chef");
 
         // Meatball setup
-        this.meatballs = new Meatball(this, Math.random() * game.config.width, 0, "meatball");
+        this.meatballs = this.add.group({
+            runChildUpdate: true
+        });
+        this.maxMeatballs = 3;
+        this.summonMeatball();
 
         // Input Setup
         keyLeft = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
         keyRight = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT);
     }
 
+    summonMeatball() {
+        this.meatballs.add(new Meatball(this));
+    }
+
     update() {
         this.background.tilePositionY -= bgMovementSpeed;
 
         this.player.update();
-
-        this.meatballs.update();
     }
 }
