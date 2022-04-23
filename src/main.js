@@ -25,7 +25,7 @@ const config = {
 let game = new Phaser.Game(config);
 
 // Input handling
-let keyLeft, keyRight;
+let keyLeft, keyRight, keyUp, keyDown;
 
 // Initialization Constants
 const UIDistance = game.config.height / 30;

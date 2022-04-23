@@ -28,6 +28,14 @@ class Play extends Phaser.Scene {
         // Input Setup
         keyLeft = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
         keyRight = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT);
+        keyUp = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP);
+        keyDown = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.DOWN);
+
+        keyDown.on("down", (event) => {
+            if(this.endOGame) {
+                this.scene.restart();
+            }
+        });
     }
 
     // Summons a new meatball at the top of the screen
