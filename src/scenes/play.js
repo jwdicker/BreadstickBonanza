@@ -10,7 +10,9 @@ class Play extends Phaser.Scene {
         this.background = this.add.tileSprite(0, 0, game.config.width, game.config.height, "background").setOrigin(0, 0);
 
         // Player setup
-        this.player = new Chef(this, game.config.width / 2, game.config.height - UIDistance - 50, "chef");
+        this.player = this.physics.add.sprite(game.config.width / 2, 0, "chef").setOrigin(0, 0);
+        this.player.y = game.config.height - this.player.displayHeight - UIDistance;
+        this.player.setCollideWorldBounds(true);
 
         // Meatball setup
         this.meatballs = this.add.group({
@@ -31,6 +33,15 @@ class Play extends Phaser.Scene {
     update() {
         this.background.tilePositionY -= bgMovementSpeed;
 
-        this.player.update();
+        // Player Movement
+        let playerVelocity = 0;
+        if(keyLeft.isDown) {
+            playerVelocity -= playerSpeed;
+        }
+
+        if(keyRight.isDown) {
+            playerVelocity += playerSpeed;
+        }
+        this.player.setVelocityX(playerVelocity);
     }
 }

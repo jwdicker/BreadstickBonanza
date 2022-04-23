@@ -32,4 +32,4 @@ const UIDistance = game.config.height / 30;
 const bgMovementSpeed = 3;
 const startingMeatballs = 2;
 const meatballSpeed = 250;
-const playerSpeed = 4;
+const playerSpeed = 500;
