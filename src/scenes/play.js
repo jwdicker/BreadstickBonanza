@@ -22,6 +22,10 @@ class Play extends Phaser.Scene {
         this.maxMeatballs = 3;
         this.summonMeatball();
 
+        // Breadstick setup
+        this.breadstick = this.physics.add.sprite(game.config.width / 2, 0, "breadstick").setOrigin(0, 0);
+        this.breadstick.y = game.config.height - this.player.displayHeight - UIDistance;
+
         // Collider setup
         this.physics.world.addCollider(this.player, this.meatballs, this.gameEnd, null, this);
 
@@ -65,6 +69,7 @@ class Play extends Phaser.Scene {
                 playerVelocity += playerSpeed;
             }
             this.player.setVelocityX(playerVelocity);   
+            this.breadstick.setVelocityX(playerVelocity);
         }
     }
 }
