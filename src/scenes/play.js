@@ -11,8 +11,8 @@ class Play extends Phaser.Scene {
         this.endOGame = false;
 
         // Player setup
-        this.player = this.physics.add.sprite(game.config.width / 2, 0, "chef").setOrigin(0, 0);
-        this.player.y = game.config.height - this.player.displayHeight - UIDistance;
+        this.player = this.physics.add.sprite(game.config.width / 2, 0, "chef").setOrigin(0.5);
+        this.player.y = game.config.height - this.player.displayHeight / 2 - UIDistance;
         this.player.setCollideWorldBounds(true);
 
         // Meatball setup
