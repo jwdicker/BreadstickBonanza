@@ -46,7 +46,22 @@ class Play extends Phaser.Scene {
     // Handles what happens when the player hits a meatball
     gameEnd() {
         this.physics.world.pause();
-        console.log("game over");
+
+        // Text setup
+        let textConfig = {
+            fontFamily: "Helvetica",
+            fontsize: "36 px",
+            backgroundColor: "#FFF",
+            color: "#000",
+            align: "center",
+            padding: {
+                top: 5,
+                bottom: 5
+            }
+        };
+        this.add.text(game.config.width / 2, game.config.height / 2 - 32, "GAME OVER", textConfig).setOrigin(0.5);
+        this.add.text(game.config.width / 2, game.config.height / 2 + 32, "Press ↓ to restart", textConfig).setOrigin(0.5);
+
         this.endOGame = true;
     }
 
