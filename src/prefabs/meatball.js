@@ -25,5 +25,4 @@ class Meatball extends Phaser.Physics.Arcade.Sprite {
             this.destroy();
         }
     }
-
 }
