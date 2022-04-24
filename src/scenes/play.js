@@ -51,6 +51,10 @@ class Play extends Phaser.Scene {
 
         // Collider setup
         this.physics.world.addCollider(this.player, this.meatballs, this.gameEnd, null, this);
+        this.physics.world.addCollider(this.bread, this.meatballs, (bread, meatball) => {
+            this.meatballs.remove(meatball, true, true);
+            this.resetBread();
+        }, null, this);
 
         keyDown.on("down", (event) => {
             if (this.endOGame) {
@@ -59,9 +63,24 @@ class Play extends Phaser.Scene {
         });
     }
 
+    // Destroys the meatball that the bread has collided with
+    destroyMeatball() {
+        for(let meatball of this.meatballs.getChildren()) {
+            console.log(this.physics.world.overlap(this.bread, meatball));
+        }
+        this.resetBread();
+    }
+
     // Summons a new meatball at the top of the screen
     summonMeatball() {
         this.meatballs.add(new Meatball(this));
+    }
+
+    // Resets the bread's off-screen position
+    resetBread() {
+        this.breadFiring = false;
+        this.bread.x = this.breadPos.x;
+        this.bread.y = this.breadPos.y;
     }
 
     // Handles what happens when the player hits a meatball
@@ -103,9 +122,7 @@ class Play extends Phaser.Scene {
 
             // Bread reset
             if(this.breadFiring && this.bread.y < -this.bread.displayHeight / 2) {
-                this.breadFiring = false;
-                this.bread.x = this.breadPos.x;
-                this.bread.y = this.breadPos.y;
+                this.resetBread();
             }
         }
     }
