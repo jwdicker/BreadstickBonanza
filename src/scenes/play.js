@@ -46,7 +46,7 @@ class Play extends Phaser.Scene {
         this.meatballs = this.add.group({
             runChildUpdate: true
         });
-        this.maxMeatballs = 3;
+        this.maxMeatballs = startingMeatballs;
         this.summonMeatball();
 
         // Collider setup
@@ -61,6 +61,13 @@ class Play extends Phaser.Scene {
             if (this.endOGame) {
                 this.scene.restart();
             }
+        });
+
+        // Difficulty progression
+        this.time.addEvent({
+            delay: 10000,
+            loop: true,
+            callback: () => {this.maxMeatballs++;}
         });
     }
 
