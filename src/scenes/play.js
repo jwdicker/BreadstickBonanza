@@ -6,6 +6,12 @@ class Play extends Phaser.Scene {
     }
 
     create() {
+        // Input Setup
+        keyLeft = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
+        keyRight = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT);
+        keyUp = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP);
+        keyDown = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.DOWN);
+
         // Background setup
         this.background = this.add.tileSprite(0, 0, game.config.width, game.config.height, "background").setOrigin(0, 0);
         this.endOGame = false;
@@ -14,6 +20,27 @@ class Play extends Phaser.Scene {
         this.player = this.physics.add.sprite(game.config.width / 2, 0, "chef").setOrigin(0.5);
         this.player.y = game.config.height - this.player.displayHeight / 2 - UIDistance;
         this.player.setCollideWorldBounds(true);
+        this.player.setDepth(1);
+
+        // Bread setup
+        this.breadFiring = false;
+        this.breadPos = {
+            x: -UIDistance,
+            y: -UIDistance
+        }
+        this.bread = this.physics.add.sprite(this.breadPos.x, this.breadPos.y, "breadstick");
+        this.bread.setOrigin(0.5);
+        this.bread.setDepth(0.5);
+
+        // Firing
+        keyUp.on("down", () => {
+            if (!this.endOGame && !this.breadFiring) {
+                this.breadFiring = true;
+                this.bread.x = this.player.x;
+                this.bread.y = this.player.y;
+                this.bread.setVelocityY(breadSpeed);
+            }
+        });
 
         // Meatball setup
         this.meatballs = this.add.group({
@@ -25,14 +52,8 @@ class Play extends Phaser.Scene {
         // Collider setup
         this.physics.world.addCollider(this.player, this.meatballs, this.gameEnd, null, this);
 
-        // Input Setup
-        keyLeft = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
-        keyRight = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT);
-        keyUp = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP);
-        keyDown = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.DOWN);
-
         keyDown.on("down", (event) => {
-            if(this.endOGame) {
+            if (this.endOGame) {
                 this.scene.restart();
             }
         });
@@ -66,8 +87,7 @@ class Play extends Phaser.Scene {
     }
 
     update() {
-        if(!this.endOGame)
-        {
+        if (!this.endOGame) {
             this.background.tilePositionY -= bgMovementSpeed;
 
             // Player Movement
@@ -79,7 +99,14 @@ class Play extends Phaser.Scene {
             if (keyRight.isDown) {
                 playerVelocity += playerSpeed;
             }
-            this.player.setVelocityX(playerVelocity);   
+            this.player.setVelocityX(playerVelocity);
+
+            // Bread reset
+            if(this.breadFiring && this.bread.y < -this.bread.displayHeight / 2) {
+                this.breadFiring = false;
+                this.bread.x = this.breadPos.x;
+                this.bread.y = this.breadPos.y;
+            }
         }
     }
 }

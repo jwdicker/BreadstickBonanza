@@ -33,3 +33,4 @@ const bgMovementSpeed = 3;
 const startingMeatballs = 2;
 const meatballSpeed = 250;
 const playerSpeed = 500;
+const breadSpeed = -500;
