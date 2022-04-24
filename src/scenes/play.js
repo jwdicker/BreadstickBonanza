@@ -52,7 +52,8 @@ class Play extends Phaser.Scene {
         // Collider setup
         this.physics.world.addCollider(this.player, this.meatballs, this.gameEnd, null, this);
         this.physics.world.addCollider(this.bread, this.meatballs, (bread, meatball) => {
-            this.meatballs.remove(meatball, true, true);
+            meatball.body = null;
+            meatball.alpha = 0;
             this.resetBread();
         }, null, this);
 

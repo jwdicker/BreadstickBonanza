@@ -22,7 +22,7 @@ class Meatball extends Phaser.Physics.Arcade.Sprite {
 
         // Kills itself once it is no longer useful
         if(this.y > game.config.height + this.height) {
-            this.destroy();
+            this.scene.meatballs.remove(this, true, true);
         }
     }
 }
