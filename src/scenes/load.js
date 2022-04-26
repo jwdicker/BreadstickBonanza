@@ -23,6 +23,8 @@ class LoadScene extends Phaser.Scene {
         });
         this.load.image('end','./assets/end.png');
         this.load.image('phone','./assets/phone.png');
+        this.load.image('phone2','./assets/phone2.png');
+        this.load.image('phone_edges','./assets/phone_edges.png');
 
     }
 

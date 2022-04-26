@@ -18,7 +18,7 @@ class Play extends Phaser.Scene {
 
         // Player setup
         this.player = this.physics.add.sprite(game.config.width / 2, 0, "chef").setOrigin(0.5);
-        this.player.y = game.config.height - this.player.displayHeight / 2 - UIDistance;
+        this.player.y = game.config.height - this.player.displayHeight / 2 - UIDistance - 80;
         this.player.setCollideWorldBounds(true);
         this.player.setDepth(1);
 
@@ -69,6 +69,9 @@ class Play extends Phaser.Scene {
             loop: true,
             callback: () => {this.maxMeatballs++;}
         });
+
+        // phone border
+        this.add.image(0,0, 'phone2').setOrigin(0,0);
     }
 
     // Destroys the meatball that the bread has collided with
@@ -77,17 +80,22 @@ class Play extends Phaser.Scene {
             console.log(this.physics.world.overlap(this.bread, meatball));
         }
         this.resetBread();
+        // phone border over meatballs
+        this.add.image(0,0, 'phone2').setOrigin(0,0);
     }
 
     // Summons a new meatball at the top of the screen
     summonMeatball() {
         this.meatballs.add(new Meatball(this));
+        // phone border over meatball
+        this.add.image(0,0, 'phone2').setOrigin(0,0);
     }
 
     // Resets the bread's off-screen position
     resetBread() {
         this.breadFiring = false;
         this.bread.x = this.breadPos.x;
+        this.add.image(0,0, 'phone2').setOrigin(0,0);
         this.bread.y = this.breadPos.y;
     }
 
@@ -95,23 +103,6 @@ class Play extends Phaser.Scene {
     gameEnd() {
         this.physics.world.pause();
         this.scene.start('end');    
-
-        // Text setup
-        // let textConfig = {
-        //     fontFamily: "Helvetica",
-        //     fontsize: "36 px",
-        //     backgroundColor: "#FFF",
-        //     color: "#000",
-        //     align: "center",
-        //     padding: {
-        //         top: 5,
-        //         bottom: 5
-        //     }
-        // };
-
-        // this.add.text(game.config.width / 2, game.config.height / 2 - 32, "GAME OVER", textConfig).setOrigin(0.5);
-        // this.add.text(game.config.width / 2, game.config.height / 2 + 32, "Press ↓ to restart", textConfig).setOrigin(0.5);
-
         this.endOGame = true;
     }
 
