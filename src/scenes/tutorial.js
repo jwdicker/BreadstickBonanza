@@ -6,10 +6,11 @@ class Tutorial extends Phaser.Scene {
    }
 
    create() {
-         keyUp = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP);
-         keyLeft = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
-         keyRight = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT);
+      this.add.image(0,0, 'phone').setOrigin(0,0);
 
+      keyUp = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP);
+      keyLeft = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
+      keyRight = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT);
 
       var tutConfig = {
          key: "tutAnimation",
@@ -23,7 +24,7 @@ class Tutorial extends Phaser.Scene {
       };
 
       this.anims.create(tutConfig);
-      var tutorial = this.add.sprite(0, 0, "tutorial").play("tutAnimation");
+      var tutorial = this.add.sprite(87, 110, "tutorial").play("tutAnimation");
       tutorial.setOrigin(0,0);
     }
 

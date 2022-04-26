@@ -12,8 +12,8 @@ console.log("Bar");
 
 const config = {
     type: Phaser.CANVAS,
-    width: 540,
-    height: 960,
+    width: 659,
+    height: 1177,
     zoom: 0.9,
     autoCenter: true,
     physics: {

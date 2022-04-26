@@ -6,8 +6,9 @@ class Menu extends Phaser.Scene {
    }
 
    create() {
+        this.add.image(0,0, 'phone').setOrigin(0,0);
         keyUp = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP);
-        this.add.image(0,0, 'menu').setOrigin(0,0);
+        this.add.image(87,110, 'menu').setOrigin(0,0);
     }
 
    update() {

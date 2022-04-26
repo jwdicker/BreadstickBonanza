@@ -6,8 +6,9 @@ class End extends Phaser.Scene {
    }
 
    create() {
-        keyUp = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP);
-        this.add.image(0,0, 'end').setOrigin(0,0);
+         this.add.image(0,0, 'phone').setOrigin(0,0);
+         keyUp = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP);
+         this.add.image(87,110, 'end').setOrigin(0,0);
     }
 
    update() {
