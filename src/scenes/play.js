@@ -55,6 +55,9 @@ class Play extends Phaser.Scene {
             meatball.body = null;
             meatball.alpha = 0;
             this.resetBread();
+            // update score
+            this.score += 1;
+            this.scoreLeft.text = this.score;  
         }, null, this);
 
         keyDown.on("down", (event) => {
@@ -69,6 +72,23 @@ class Play extends Phaser.Scene {
             loop: true,
             callback: () => {this.maxMeatballs++;}
         });
+
+        // Scoring
+        this.score = 0;
+        // display
+        let scoreConfig = {
+            fontFamily: 'Courier',
+            fontSize: '50px',
+            color: '#843605',
+            align: 'center',
+            padding: {
+            top: 5,
+            bottom: 5,
+            },
+            fixedWidth: 100
+        }
+        // add to screen
+        this.scoreLeft = this.add.text(300,150, this.score, scoreConfig);
 
         // phone border
         this.add.image(0,0, 'phone2').setOrigin(0,0);
@@ -102,6 +122,7 @@ class Play extends Phaser.Scene {
     // Handles what happens when the player hits a meatball
     gameEnd() {
         this.physics.world.pause();
+        scoreEnd = this.score;
         this.scene.start('end');    
         this.endOGame = true;
     }
