@@ -4,7 +4,7 @@ console.log("Bar");
 // Names:
 // Alexis Adolpho
 // Jacob Dickerman
-// Grce Ho
+// Grace Ho
 // 
 // Sources: 
 // https://phaser.discourse.group/t/center-game-on-my-website/5921/3
@@ -19,7 +19,7 @@ const config = {
     physics: {
         default: "arcade"
     },
-    scene: [LoadScene, Play]
+    scene: [LoadScene, Menu, Tutorial, Play, End]
 };
 
 let game = new Phaser.Game(config);
