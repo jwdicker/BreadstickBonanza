@@ -28,7 +28,7 @@ let game = new Phaser.Game(config);
 let keyLeft, keyRight, keyUp, keyDown;
 
 // Score
-let scoreEnd = 0;
+var scoreEnd = 0;
 
 // Initialization Constants
 const UIDistance = game.config.height / 30;
