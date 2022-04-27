@@ -12,6 +12,9 @@ class Play extends Phaser.Scene {
         keyUp = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP);
         keyDown = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.DOWN);
 
+        // Adjusting physics bounds
+        this.physics.world.bounds.setTo(gameCanvasConfig.offset.x, gameCanvasConfig.offset.y, gameCanvasConfig.width, gameCanvasConfig.height);
+
         // phone border
         this.border = this.add.image(0,0, 'phone2');
         this.border.setOrigin(0,0);
@@ -24,6 +27,7 @@ class Play extends Phaser.Scene {
         // Player setup
         this.player = this.physics.add.sprite(gameCanvasConfig.getCenter().x, 0, "idle").setOrigin(0.5);
         this.player.y = gameCanvasConfig.height + gameCanvasConfig.offset.y - this.player.displayHeight / 2 - UIDistance;
+        this.player.setCollideWorldBounds(true);
         this.player.setDepth(1);
 
         this.anims.create({
@@ -87,6 +91,7 @@ class Play extends Phaser.Scene {
         this.summonMeatball();
 
         // Collider setup
+        this.physics.world.addCollider(this.player, this.border);
         this.physics.world.addCollider(this.player, this.meatballs, this.gameEnd, null, this);
         this.physics.world.addCollider(this.bread, this.meatballs, (bread, meatball) => {
             meatball.body = null;
