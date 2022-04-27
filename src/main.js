@@ -60,3 +60,4 @@ const startingMeatballs = 1;
 const meatballSpeed = 250;
 const playerSpeed = 500;
 const breadSpeed = -500;
+const meatballRadius = 30;

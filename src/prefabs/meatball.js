@@ -3,7 +3,7 @@ class Meatball extends Phaser.Physics.Arcade.Sprite {
 
     constructor(scene){
         // Physics sprite setup
-        super(scene, Math.random() * game.config.width, -UIDistance, "meatball");
+        super(scene, (Math.random() * (gameCanvasConfig.width - 2 * meatballRadius)) + gameCanvasConfig.offset.x + meatballRadius, gameCanvasConfig.offset.y - UIDistance, "meatball");
         scene.add.existing(this);
         scene.physics.add.existing(this);
         this.setVelocityY(meatballSpeed);
