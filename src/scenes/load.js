@@ -8,8 +8,24 @@ class LoadScene extends Phaser.Scene {
     // Loads images
     preload() {
         // chef states
-        this.load.image('chef','./assets/chef_idle.png');
-        this.load.image('chef_shoot','./assets/chef_shoot.png');
+        //this.load.image('idle','./assets/chef_idle.png');
+        this.load.spritesheet('idle', './assets/chef_idle.png', {
+            frameWidth: 77, 
+            frameHeight: 137
+        });
+        //this.load.image('shoot','./assets/chef_shoot.png');
+        this.load.spritesheet('shoot', './assets/chef_shoot.png', {
+            frameWidth: 70, 
+            frameHeight: 136
+        });
+        this.load.spritesheet('walkleft', './assets/walkleft_sheet.png', {
+            frameWidth: 64, 
+            frameHeight: 136
+        });
+        this.load.spritesheet('walkright', './assets/walkright_sheet.png', {
+            frameWidth: 64, 
+            frameHeight: 136
+        });
         // items
         this.load.image('meatball','./assets/meatball.png');
         this.load.image('breadstick','./assets/breadstick.png');

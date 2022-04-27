@@ -17,10 +17,43 @@ class Play extends Phaser.Scene {
         this.endOGame = false;
 
         // Player setup
-        this.player = this.physics.add.sprite(game.config.width / 2, 0, "chef").setOrigin(0.5);
+        this.player = this.physics.add.sprite(game.config.width / 2, 0, "idle").setOrigin(0.5);
         this.player.y = game.config.height - this.player.displayHeight / 2 - UIDistance - 80;
         this.player.setCollideWorldBounds(true);
         this.player.setDepth(1);
+
+        this.anims.create({
+            key: "idleAni",
+            frameRate: 0,
+            frames: this.anims.generateFrameNumbers("idle", {
+            start: 0, 
+            end: 0}),
+            repeat: -1
+        });
+        this.anims.create({
+            key: "shootAni",
+            frameRate: 0,
+            frames: this.anims.generateFrameNumbers("shoot", {
+            start: 0, 
+            end: 0}),
+            repeat: -1
+        });
+        this.anims.create({
+            key: "walkleftAni",
+            frameRate: 7,
+            frames: this.anims.generateFrameNumbers("walkleft", {
+            start: 0, 
+            end: 2}),
+            repeat: -1
+        });
+        this.anims.create({
+            key: "walkrightAni",
+            frameRate: 7,
+            frames: this.anims.generateFrameNumbers("walkright", {
+            start: 0, 
+            end: 2}),
+            repeat: -1
+        });
 
         // Bread setup
         this.breadFiring = false;
@@ -134,16 +167,23 @@ class Play extends Phaser.Scene {
             // Player Movement
             let playerVelocity = 0;
             if (keyLeft.isDown) {
+                this.player.anims.play("walkleftAni", true);
                 playerVelocity -= playerSpeed;
             }
-
             if (keyRight.isDown) {
+                this.player.anims.play("walkrightAni", true);
                 playerVelocity += playerSpeed;
+            }
+            if (keyUp.isDown) {
+                this.player.anims.play("shootAni", true);
+            }
+            if(!keyRight.isDown && !keyLeft.isDown){
+                this.player.anims.play("idleAni", true);
             }
             this.player.setVelocityX(playerVelocity);
 
             // Bread reset
-            if(this.breadFiring && this.bread.y < -this.bread.displayHeight / 2) {
+            if(this.breadFiring && this.bread.y < -this.bread.displayHeight / 2 -100) {
                 this.resetBread();
             }
         }
