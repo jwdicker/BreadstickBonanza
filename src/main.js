@@ -14,7 +14,7 @@ const config = {
     type: Phaser.CANVAS,
     width: 659,
     height: 1177,
-    zoom: 0.9,
+    zoom: 0.8,
     autoCenter: true,
     physics: {
         default: "arcade"
@@ -23,6 +23,22 @@ const config = {
 };
 
 let game = new Phaser.Game(config);
+
+// Configurations of stuff on the phone screen
+const gameCanvasConfig = {
+    width: 540,
+    height: 960,
+    offset: {
+        x: 87,
+        y: 111
+    },
+    getCenter: function(){
+        return {
+            x: this.width / 2 + this.offset.x,
+            y: this.height / 2 + this.offset.y
+        };
+    }
+}
 
 // Input handling
 let keyLeft, keyRight, keyUp, keyDown;

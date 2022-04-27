@@ -12,14 +12,18 @@ class Play extends Phaser.Scene {
         keyUp = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP);
         keyDown = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.DOWN);
 
+        // phone border
+        this.border = this.add.image(0,0, 'phone2');
+        this.border.setOrigin(0,0);
+        this.border.setDepth(10);
+
         // Background setup
-        this.background = this.add.tileSprite(0, 0, game.config.width, game.config.height, "background").setOrigin(0, 0);
+        this.background = this.add.tileSprite(gameCanvasConfig.offset.x, gameCanvasConfig.offset.y, gameCanvasConfig.width, gameCanvasConfig.height, "background").setOrigin(0, 0);
         this.endOGame = false;
 
         // Player setup
-        this.player = this.physics.add.sprite(game.config.width / 2, 0, "idle").setOrigin(0.5);
-        this.player.y = game.config.height - this.player.displayHeight / 2 - UIDistance - 80;
-        this.player.setCollideWorldBounds(true);
+        this.player = this.physics.add.sprite(gameCanvasConfig.getCenter().x, 0, "idle").setOrigin(0.5);
+        this.player.y = gameCanvasConfig.height + gameCanvasConfig.offset.y - this.player.displayHeight / 2 - UIDistance;
         this.player.setDepth(1);
 
         this.anims.create({
@@ -122,9 +126,6 @@ class Play extends Phaser.Scene {
         }
         // add to screen
         this.scoreLeft = this.add.text(300,150, this.score, scoreConfig);
-
-        // phone border
-        this.add.image(0,0, 'phone2').setOrigin(0,0);
     }
 
     // Destroys the meatball that the bread has collided with
@@ -133,22 +134,17 @@ class Play extends Phaser.Scene {
             console.log(this.physics.world.overlap(this.bread, meatball));
         }
         this.resetBread();
-        // phone border over meatballs
-        this.add.image(0,0, 'phone2').setOrigin(0,0);
     }
 
     // Summons a new meatball at the top of the screen
     summonMeatball() {
         this.meatballs.add(new Meatball(this));
-        // phone border over meatball
-        this.add.image(0,0, 'phone2').setOrigin(0,0);
     }
 
     // Resets the bread's off-screen position
     resetBread() {
         this.breadFiring = false;
         this.bread.x = this.breadPos.x;
-        this.add.image(0,0, 'phone2').setOrigin(0,0);
         this.bread.y = this.breadPos.y;
     }
 
