@@ -6,9 +6,16 @@ console.log("Bar");
 // Jacob Dickerman
 // Grace Ho
 // 
+// Game: "Breadstick Bonanza" completed ?/?/22
+//
 // Sources: 
 // https://phaser.discourse.group/t/center-game-on-my-website/5921/3
 // https://github.com/nathanaltice/PaddleParkourP3
+// https://github.com/nathanaltice/MovementStudies
+//
+// Creative Tilt:
+// technical - 
+// visual - 
 
 const config = {
     type: Phaser.CANVAS,
