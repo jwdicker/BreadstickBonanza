@@ -7,6 +7,7 @@ class Meatball extends Phaser.Physics.Arcade.Sprite {
         scene.add.existing(this);
         scene.physics.add.existing(this);
         this.setVelocityY(meatballSpeed * scene.meatSpeedMultiplier);
+        this.setCircle(meatballRadius);
         this.setImmovable(true);
         //this.setCircle(meatballRadius); NOTE: Currently commented as it breaks stuff for some reason
 

@@ -97,8 +97,8 @@ class Play extends Phaser.Scene {
 
         // Collider setup
         this.physics.world.addCollider(this.player, this.border);
-        this.physics.world.addCollider(this.player, this.meatballs, this.gameEnd, null, this);
-        this.physics.world.addCollider(this.bread, this.meatballs, (bread, meatball) => {
+        this.physics.world.addOverlap(this.player, this.meatballs, this.gameEnd, null, this);
+        this.physics.world.addOverlap(this.bread, this.meatballs, (bread, meatball) => {
             meatball.body = null;
             meatball.alpha = 0;
             this.resetBread();
