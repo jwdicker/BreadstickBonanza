@@ -178,7 +178,7 @@ class Play extends Phaser.Scene {
             if (keyUp.isDown) {
                 this.player.anims.play("shootAni", true);
             }
-            if(!keyRight.isDown && !keyLeft.isDown){
+            if((!keyRight.isDown && !keyLeft.isDown) || (keyRight.isDown && keyLeft.isDown)){
                 this.player.anims.play("idleAni", true);
             }
             this.player.setVelocityX(playerVelocity);
