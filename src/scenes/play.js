@@ -133,14 +133,6 @@ class Play extends Phaser.Scene {
         this.scoreLeft = this.add.text(300,150, this.score, scoreConfig);
     }
 
-    // Destroys the meatball that the bread has collided with
-    destroyMeatball() {
-        for(let meatball of this.meatballs.getChildren()) {
-            console.log(this.physics.world.overlap(this.bread, meatball));
-        }
-        this.resetBread();
-    }
-
     // Summons a new meatball at the top of the screen
     summonMeatball() {
         this.meatballs.add(new Meatball(this));
