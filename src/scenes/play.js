@@ -16,8 +16,8 @@ class Play extends Phaser.Scene {
         this.physics.world.bounds.setTo(gameCanvasConfig.offset.x, gameCanvasConfig.offset.y, gameCanvasConfig.width, gameCanvasConfig.height);
 
         // phone border
-        this.border = this.add.image(0,0, 'phone2');
-        this.border.setOrigin(0,0);
+        this.border = this.add.image(0, 0, 'phone2');
+        this.border.setOrigin(0, 0);
         this.border.setDepth(10);
 
         // Background setup
@@ -34,32 +34,36 @@ class Play extends Phaser.Scene {
             key: "idleAni",
             frameRate: 0,
             frames: this.anims.generateFrameNumbers("idle", {
-            start: 0, 
-            end: 0}),
+                start: 0,
+                end: 0
+            }),
             repeat: -1
         });
         this.anims.create({
             key: "shootAni",
             frameRate: 0,
             frames: this.anims.generateFrameNumbers("shoot", {
-            start: 0, 
-            end: 0}),
+                start: 0,
+                end: 0
+            }),
             repeat: -1
         });
         this.anims.create({
             key: "walkleftAni",
             frameRate: 7,
             frames: this.anims.generateFrameNumbers("walkleft", {
-            start: 0, 
-            end: 2}),
+                start: 0,
+                end: 2
+            }),
             repeat: -1
         });
         this.anims.create({
             key: "walkrightAni",
             frameRate: 7,
             frames: this.anims.generateFrameNumbers("walkright", {
-            start: 0, 
-            end: 2}),
+                start: 0,
+                end: 2
+            }),
             repeat: -1
         });
 
@@ -98,9 +102,6 @@ class Play extends Phaser.Scene {
             meatball.body = null;
             meatball.alpha = 0;
             this.resetBread();
-            // update score
-            this.score += 1;
-            this.scoreLeft.text = this.score;  
         }, null, this);
 
         keyDown.on("down", (event) => {
@@ -109,15 +110,8 @@ class Play extends Phaser.Scene {
             }
         });
 
-        // Difficulty progression
-        this.time.addEvent({
-            delay: 10000,
-            loop: true,
-            callback: () => {this.maxMeatballs++; this.meatSpeedMultiplier *= 1.1;}
-        });
-
         // Scoring
-        this.score = 0;
+        this.score = 1;
         // display
         let scoreConfig = {
             fontFamily: 'Courier',
@@ -125,13 +119,26 @@ class Play extends Phaser.Scene {
             color: '#843605',
             align: 'center',
             padding: {
-            top: 5,
-            bottom: 5,
+                top: 5,
+                bottom: 5,
             },
             fixedWidth: 100
         }
         // add to screen
-        this.scoreLeft = this.add.text(300,150, this.score, scoreConfig);
+        this.scoreLeft = this.add.text(300, 150, this.score, scoreConfig);
+
+        // Difficulty progression
+        this.time.addEvent({
+            delay: 10000,
+            loop: true,
+            callback: () => {
+                this.maxMeatballs++;
+                this.meatSpeedMultiplier *= 1.1;
+                // update score
+                this.score += 1;
+                this.scoreLeft.text = this.score;
+            }
+        });
     }
 
     // Summons a new meatball at the top of the screen
@@ -150,7 +157,7 @@ class Play extends Phaser.Scene {
     gameEnd() {
         this.physics.world.pause();
         scoreEnd = this.score;
-        this.scene.start('end');    
+        this.scene.start('end');
         this.endOGame = true;
     }
 
@@ -171,13 +178,13 @@ class Play extends Phaser.Scene {
             if (keyUp.isDown) {
                 this.player.anims.play("shootAni", true);
             }
-            if((!keyRight.isDown && !keyLeft.isDown) || (keyRight.isDown && keyLeft.isDown)){
+            if ((!keyRight.isDown && !keyLeft.isDown) || (keyRight.isDown && keyLeft.isDown)) {
                 this.player.anims.play("idleAni", true);
             }
             this.player.setVelocityX(playerVelocity);
 
             // Bread reset
-            if(this.breadFiring && this.bread.y < -this.bread.displayHeight / 2 -100) {
+            if (this.breadFiring && this.bread.y < -this.bread.displayHeight / 2 - 100) {
                 this.resetBread();
             }
         }
