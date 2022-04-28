@@ -15,7 +15,13 @@ console.log("Bar");
 //
 // Creative Tilt:
 // technical - 
-// visual - 
+// visual - We interpreted 'endless runner' literally at first, 
+// by using 'olive garden endless breadsticks' as the starting point. 
+// That idea was expanded to have the player use the breadsticks 
+// as endless ammo to defeat enemies. We stuck with the faux italian 
+// restaurant theme and had the player be a chef and the enemies be 
+// meatballs. Also, we named a number of things using alliteration 
+// (breadstick bonanza, meatball madness).
 
 const config = {
     type: Phaser.CANVAS,
