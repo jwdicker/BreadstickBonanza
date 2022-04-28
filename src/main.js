@@ -30,7 +30,10 @@ const config = {
     zoom: 0.8,
     autoCenter: true,
     physics: {
-        default: "arcade"
+        default: "arcade",
+        arcade: {
+            debug: true
+        }
     },
     scene: [LoadScene, Menu, Tutorial, Play, End]
 };
@@ -63,7 +66,8 @@ var scoreEnd = 0;
 const UIDistance = game.config.height / 30;
 const bgMovementSpeed = 3;
 const startingMeatballs = 1;
-const meatballSpeed = 250;
+const meatballSpeed = 400;
+const startingMeatSpeedMultiplier = 1.0;
 const playerSpeed = 500;
 const breadSpeed = -500;
 const meatballRadius = 30;

@@ -6,8 +6,9 @@ class Meatball extends Phaser.Physics.Arcade.Sprite {
         super(scene, (Math.random() * (gameCanvasConfig.width - 2 * meatballRadius)) + gameCanvasConfig.offset.x + meatballRadius, gameCanvasConfig.offset.y - UIDistance, "meatball");
         scene.add.existing(this);
         scene.physics.add.existing(this);
-        this.setVelocityY(meatballSpeed);
+        this.setVelocityY(meatballSpeed * scene.meatSpeedMultiplier);
         this.setImmovable(true);
+        //this.setCircle(meatballRadius); NOTE: Currently commented as it breaks stuff for some reason
 
         // Whether or not this meatball has summoned another meatball
         this.summonedAlly = false;

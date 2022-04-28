@@ -88,6 +88,7 @@ class Play extends Phaser.Scene {
             runChildUpdate: true
         });
         this.maxMeatballs = startingMeatballs;
+        this.meatSpeedMultiplier = startingMeatSpeedMultiplier;
         this.summonMeatball();
 
         // Collider setup
@@ -112,7 +113,7 @@ class Play extends Phaser.Scene {
         this.time.addEvent({
             delay: 10000,
             loop: true,
-            callback: () => {this.maxMeatballs++;}
+            callback: () => {this.maxMeatballs++; this.meatSpeedMultiplier *= 1.1;}
         });
 
         // Scoring
