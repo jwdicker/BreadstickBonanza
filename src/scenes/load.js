@@ -14,14 +14,13 @@ class LoadScene extends Phaser.Scene {
             min: UIDistance,
             max: game.config.width - 2 * UIDistance
         }
-        console.log(loadX);
         this.load.on('progress', (value) => {
             loadingBar.clear();                                 // reset fill/line style
             loadingBar.fillStyle(0xFFFFFF, 1);                  // (color, alpha)
             loadingBar.fillRect(loadX.min, gameCanvasConfig.getCenter().y, loadX.max * value, 5);  // (x, y, w, h)
         });
         this.load.on('complete', () => {
-            //loadingBar.destroy();
+            loadingBar.destroy();
         });
 
         // Image & animation Loading
