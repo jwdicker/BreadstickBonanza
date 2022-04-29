@@ -48,7 +48,7 @@ const gameCanvasConfig = {
         x: 87,
         y: 111
     },
-    getCenter: function(){
+    getCenter: function () {
         return {
             x: this.width / 2 + this.offset.x,
             y: this.height / 2 + this.offset.y
