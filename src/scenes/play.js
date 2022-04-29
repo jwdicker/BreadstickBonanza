@@ -206,7 +206,7 @@ class Play extends Phaser.Scene {
             this.player.setVelocityX(playerVelocity);
 
             // Bread reset
-            if (this.breadFiring && this.bread.y < -this.bread.displayHeight / 2 - 100) {
+            if (this.breadFiring && this.bread.y < gameCanvasConfig.offset.y - this.bread.displayHeight) {
                 this.resetBread();
             }
         }
