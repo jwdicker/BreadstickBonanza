@@ -50,6 +50,8 @@ class LoadScene extends Phaser.Scene {
         this.load.image('phone', './assets/phone.png');
         this.load.image('phone2', './assets/phone2.png');
         this.load.image('phone_edges', './assets/phone_edges.png');
+        this.load.image('floor', './assets/floor.png');
+
 
         // Audio Loading
         this.load.audio("soundtrack", "assets/backgroundtheme.wav");

@@ -19,9 +19,13 @@ class Play extends Phaser.Scene {
         this.border.setOrigin(0, 0);
         this.border.setDepth(10);
 
+        
+
         // Background setup
         this.background = this.add.tileSprite(gameCanvasConfig.offset.x, gameCanvasConfig.offset.y, gameCanvasConfig.width, gameCanvasConfig.height, "background").setOrigin(0, 0);
         this.endOGame = false;
+
+        this.add.image(357, 595, 'floor');
 
         // Player setup
         this.player = this.physics.add.sprite(gameCanvasConfig.getCenter().x, 0, "idle").setOrigin(0.5);
