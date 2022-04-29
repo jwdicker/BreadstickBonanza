@@ -28,10 +28,7 @@ const config = {
     zoom: 0.8,
     autoCenter: true,
     physics: {
-        default: "arcade",
-        arcade: {
-            debug: true
-        }
+        default: "arcade"
     },
     scene: [LoadScene, Menu, Tutorial, Play, End]
 };
