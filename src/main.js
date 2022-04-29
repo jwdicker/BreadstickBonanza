@@ -58,7 +58,7 @@ let keyLeft, keyRight, keyUp, keyDown;
 let scoreEnd = 0;
 
 // Initialization Constants
-const UIDistance = game.config.height / 30;
+const UIDistance = gameCanvasConfig.height / 30;
 const bgMovementSpeed = 3;
 const startingMeatballs = 1;
 const meatballSpeed = 400;
