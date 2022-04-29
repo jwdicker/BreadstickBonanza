@@ -15,7 +15,7 @@ class End extends Phaser.Scene {
 
         // img + anim
         this.add.image(0, 0, 'phone').setOrigin(0, 0);
-        var endConfig = {
+        let endConfig = {
             key: "endAnimation",
             frames: this.anims.generateFrameNumbers("end", {
                 start: 0,
@@ -26,7 +26,7 @@ class End extends Phaser.Scene {
             repeat: -1
         };
         this.anims.create(endConfig);
-        var end = this.add.sprite(87, 110, "end").play("endAnimation");
+        let end = this.add.sprite(87, 110, "end").play("endAnimation");
         end.setOrigin(0, 0);
 
         // sounds

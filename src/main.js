@@ -55,7 +55,7 @@ const gameCanvasConfig = {
 let keyLeft, keyRight, keyUp, keyDown;
 
 // Score
-var scoreEnd = 0;
+let scoreEnd = 0;
 
 // Initialization Constants
 const UIDistance = game.config.height / 30;

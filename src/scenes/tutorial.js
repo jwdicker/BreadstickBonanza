@@ -12,7 +12,7 @@ class Tutorial extends Phaser.Scene {
       keyLeft = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
       keyRight = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT);
 
-      var tutConfig = {
+      let tutConfig = {
          key: "tutAnimation",
          frames: this.anims.generateFrameNumbers("tutorial", {
             start: 0,
@@ -24,7 +24,7 @@ class Tutorial extends Phaser.Scene {
       };
 
       this.anims.create(tutConfig);
-      var tutorial = this.add.sprite(87, 110, "tutorial").play("tutAnimation");
+      let tutorial = this.add.sprite(87, 110, "tutorial").play("tutAnimation");
       tutorial.setOrigin(0, 0);
    }
 

@@ -8,7 +8,7 @@ class Menu extends Phaser.Scene {
     create() {
         this.add.image(0, 0, 'phone').setOrigin(0, 0);
         keyUp = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP);
-        var menuConfig = {
+        let menuConfig = {
             key: "menuAnimation",
             frames: this.anims.generateFrameNumbers("menu", {
                 start: 0,
@@ -20,7 +20,7 @@ class Menu extends Phaser.Scene {
         };
 
         this.anims.create(menuConfig);
-        var menu = this.add.sprite(87, 110, "menu").play("menuAnimation");
+        let menu = this.add.sprite(87, 110, "menu").play("menuAnimation");
         menu.setOrigin(0, 0);
 
         console.log("Menu");
