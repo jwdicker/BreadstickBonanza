@@ -68,9 +68,9 @@ class Play extends Phaser.Scene {
         });
 
         // Audio Setup
-        this.soundtrack = this.sound.add("soundtrack", {loop: true, volume: 0.5});
-        this.explosion = this.sound.add("sfx_explode");
-        this.shoot = this.sound.add("sfx_bread");
+        this.soundtrack = this.sound.add("soundtrack", {loop: true, volume: 0.25});
+        this.explosion = this.sound.add("sfx_explode", {volume: 1.5});
+        this.shoot = this.sound.add("sfx_bread", {volume: 1});
 
         // Bread setup
         this.breadFiring = false;

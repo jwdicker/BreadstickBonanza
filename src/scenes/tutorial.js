@@ -32,6 +32,7 @@ class Tutorial extends Phaser.Scene {
       console.log("Tutorial");
 
       if (Phaser.Input.Keyboard.JustDown(keyUp) || Phaser.Input.Keyboard.JustDown(keyLeft) || Phaser.Input.Keyboard.JustDown(keyRight)) {
+         this.sound.play('sfx_select');
          this.scene.start("play");
       }
    }

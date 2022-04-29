@@ -26,6 +26,7 @@ class Menu extends Phaser.Scene {
         console.log("Menu");
 
         keyUp.on("down", () => {
+            this.sound.play('sfx_select');
             this.scene.start("tutorial");
         });
     }

@@ -27,6 +27,9 @@ class End extends Phaser.Scene {
         var end = this.add.sprite(87, 110, "end").play("endAnimation");
         end.setOrigin(0, 0);
 
+        this.soundtrack = this.sound.add("endtrack", {loop: true, volume: 0.5});
+        this.sound.play('endtrack');
+
         // display
         let scoreConfig = {
             fontFamily: 'Courier Bold',
@@ -44,6 +47,7 @@ class End extends Phaser.Scene {
 
         console.log("End");
         keyDown.on("down", () => {
+            this.sound.play('sfx_select');
             this.scene.start("play");
         });
     }
