@@ -67,6 +67,11 @@ class Play extends Phaser.Scene {
             repeat: -1
         });
 
+        // Audio Setup
+        this.soundtrack = this.sound.add("soundtrack", {loop: true, volume: 0.5});
+        this.explosion = this.sound.add("sfx_explode");
+        this.shoot = this.sound.add("sfx_bread");
+
         // Bread setup
         this.breadFiring = false;
         this.breadPos = {
@@ -80,6 +85,7 @@ class Play extends Phaser.Scene {
         // Firing
         keyUp.on("down", () => {
             if (!this.endOGame && !this.breadFiring) {
+                this.shoot.play();
                 this.breadFiring = true;
                 this.bread.x = this.player.x;
                 this.bread.y = this.player.y;
@@ -99,16 +105,11 @@ class Play extends Phaser.Scene {
         this.physics.world.addCollider(this.player, this.border);
         this.physics.world.addOverlap(this.player, this.meatballs, this.gameEnd, null, this);
         this.physics.world.addOverlap(this.bread, this.meatballs, (bread, meatball) => {
+            this.explosion.play();
             meatball.body = null;
             meatball.alpha = 0;
             this.resetBread();
         }, null, this);
-
-        keyDown.on("down", (event) => {
-            if (this.endOGame) {
-                this.scene.restart();
-            }
-        });
 
         // Scoring
         this.score = 1;
@@ -139,6 +140,9 @@ class Play extends Phaser.Scene {
                 this.scoreLeft.text = this.score;
             }
         });
+
+        // Begin the soundtrack
+        this.soundtrack.play();
     }
 
     // Summons a new meatball at the top of the screen
@@ -156,6 +160,7 @@ class Play extends Phaser.Scene {
     // Handles what happens when the player hits a meatball
     gameEnd() {
         this.physics.world.pause();
+        this.soundtrack.stop();
         scoreEnd = this.score;
         this.scene.start('end');
         this.endOGame = true;

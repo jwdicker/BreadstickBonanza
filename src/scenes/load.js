@@ -7,6 +7,7 @@ class LoadScene extends Phaser.Scene {
 
     // Loads images
     preload() {
+        // Image & animation Loading
         // chef states
         //this.load.image('idle','./assets/chef_idle.png');
         this.load.spritesheet('idle', './assets/chef_idle.png', {
@@ -42,6 +43,10 @@ class LoadScene extends Phaser.Scene {
         this.load.image('phone2', './assets/phone2.png');
         this.load.image('phone_edges', './assets/phone_edges.png');
 
+        // Audio Loading
+        this.load.audio("soundtrack", "assets/backgroundtheme.wav");
+        this.load.audio("sfx_bread", "assets/breadshot.wav");
+        this.load.audio("sfx_explode", "assets/explosion.wav");
     }
 
     create() {
