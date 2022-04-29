@@ -18,11 +18,11 @@ class LoadScene extends Phaser.Scene {
             frameHeight: 136
         });
         this.load.spritesheet('walkleft', './assets/walkleft_sheet.png', {
-            frameWidth: 64,
+            frameWidth: 70,
             frameHeight: 136
         });
         this.load.spritesheet('walkright', './assets/walkright_sheet.png', {
-            frameWidth: 64,
+            frameWidth: 70,
             frameHeight: 136
         });
 
