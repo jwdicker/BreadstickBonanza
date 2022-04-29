@@ -26,14 +26,12 @@ class Tutorial extends Phaser.Scene {
       this.anims.create(tutConfig);
       let tutorial = this.add.sprite(87, 110, "tutorial").play("tutAnimation");
       tutorial.setOrigin(0, 0);
-   }
 
-   update() {
       console.log("Tutorial");
 
-      if (Phaser.Input.Keyboard.JustDown(keyUp) || Phaser.Input.Keyboard.JustDown(keyLeft) || Phaser.Input.Keyboard.JustDown(keyRight)) {
+      keyUp.on("down", () => {
          this.sound.play('sfx_select');
          this.scene.start("play");
-      }
+      });
    }
 }
