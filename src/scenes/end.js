@@ -28,7 +28,6 @@ class End extends Phaser.Scene {
         this.anims.create(endConfig);
         let end = this.add.sprite(87, 110, "end").play("endAnimation");
         end.setOrigin(0, 0);
-
         // sounds
         this.soundtrack = this.sound.add("endtrack", {loop: true, volume: 0.25});
         this.soundtrack.play();

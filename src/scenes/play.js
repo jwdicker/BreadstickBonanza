@@ -179,7 +179,16 @@ class Play extends Phaser.Scene {
         this.physics.world.pause();
         this.soundtrack.stop();
         scoreEnd = this.score;
-        this.scene.start('end');
+        this.player.body = null;
+        // fade out death scene
+        this.tweens.add({
+            targets: this.player,
+            alpha: 0,
+            duration: 200
+        });
+        this.time.delayedCall(1000, () => {
+            this.scene.start('end', { fadeIn: true })
+        })
         this.endOGame = true;
     }
 
