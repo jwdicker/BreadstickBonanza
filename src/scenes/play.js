@@ -10,15 +10,22 @@ class Play extends Phaser.Scene {
         keyLeft = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
         keyRight = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT);
         keyUp = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP);
-        keyDown = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.DOWN);
+
+        // Adjusting physics bounds
+        this.physics.world.bounds.setTo(gameCanvasConfig.offset.x, gameCanvasConfig.offset.y, gameCanvasConfig.width, gameCanvasConfig.height);
+
+        // phone border
+        this.border = this.add.image(0, 0, 'phone2');
+        this.border.setOrigin(0, 0);
+        this.border.setDepth(10);
 
         // Background setup
-        this.background = this.add.tileSprite(0, 0, game.config.width, game.config.height, "background").setOrigin(0, 0);
+        this.background = this.add.tileSprite(gameCanvasConfig.offset.x, gameCanvasConfig.offset.y, gameCanvasConfig.width, gameCanvasConfig.height, "background").setOrigin(0, 0);
         this.endOGame = false;
 
         // Player setup
-        this.player = this.physics.add.sprite(game.config.width / 2, 0, "idle").setOrigin(0.5);
-        this.player.y = game.config.height - this.player.displayHeight / 2 - UIDistance - 80;
+        this.player = this.physics.add.sprite(gameCanvasConfig.getCenter().x, 0, "idle").setOrigin(0.5);
+        this.player.y = gameCanvasConfig.height + gameCanvasConfig.offset.y - this.player.displayHeight / 2 - UIDistance;
         this.player.setCollideWorldBounds(true);
         this.player.setDepth(1);
 
@@ -26,34 +33,43 @@ class Play extends Phaser.Scene {
             key: "idleAni",
             frameRate: 0,
             frames: this.anims.generateFrameNumbers("idle", {
-            start: 0, 
-            end: 0}),
+                start: 0,
+                end: 0
+            }),
             repeat: -1
         });
         this.anims.create({
             key: "shootAni",
             frameRate: 0,
             frames: this.anims.generateFrameNumbers("shoot", {
-            start: 0, 
-            end: 0}),
+                start: 0,
+                end: 0
+            }),
             repeat: -1
         });
         this.anims.create({
             key: "walkleftAni",
             frameRate: 7,
             frames: this.anims.generateFrameNumbers("walkleft", {
-            start: 0, 
-            end: 2}),
+                start: 0,
+                end: 2
+            }),
             repeat: -1
         });
         this.anims.create({
             key: "walkrightAni",
             frameRate: 7,
             frames: this.anims.generateFrameNumbers("walkright", {
-            start: 0, 
-            end: 2}),
+                start: 0,
+                end: 2
+            }),
             repeat: -1
         });
+
+        // Audio Setup
+        this.soundtrack = this.sound.add("soundtrack", {loop: true, volume: 0.5});
+        this.explosion = this.sound.add("sfx_explode");
+        this.shoot = this.sound.add("sfx_bread");
 
         // Bread setup
         this.breadFiring = false;
@@ -68,6 +84,7 @@ class Play extends Phaser.Scene {
         // Firing
         keyUp.on("down", () => {
             if (!this.endOGame && !this.breadFiring) {
+                this.shoot.play();
                 this.breadFiring = true;
                 this.bread.x = this.player.x;
                 this.bread.y = this.player.y;
@@ -80,34 +97,21 @@ class Play extends Phaser.Scene {
             runChildUpdate: true
         });
         this.maxMeatballs = startingMeatballs;
+        this.meatSpeedMultiplier = startingMeatSpeedMultiplier;
         this.summonMeatball();
 
         // Collider setup
-        this.physics.world.addCollider(this.player, this.meatballs, this.gameEnd, null, this);
-        this.physics.world.addCollider(this.bread, this.meatballs, (bread, meatball) => {
+        this.physics.world.addCollider(this.player, this.border);
+        this.physics.world.addOverlap(this.player, this.meatballs, this.gameEnd, null, this);
+        this.physics.world.addOverlap(this.bread, this.meatballs, (bread, meatball) => {
+            this.explosion.play();
             meatball.body = null;
             meatball.alpha = 0;
             this.resetBread();
-            // update score
-            this.score += 1;
-            this.scoreLeft.text = this.score;  
         }, null, this);
 
-        keyDown.on("down", (event) => {
-            if (this.endOGame) {
-                this.scene.restart();
-            }
-        });
-
-        // Difficulty progression
-        this.time.addEvent({
-            delay: 10000,
-            loop: true,
-            callback: () => {this.maxMeatballs++;}
-        });
-
         // Scoring
-        this.score = 0;
+        this.score = 1;
         // display
         let scoreConfig = {
             fontFamily: 'Courier',
@@ -115,48 +119,49 @@ class Play extends Phaser.Scene {
             color: '#843605',
             align: 'center',
             padding: {
-            top: 5,
-            bottom: 5,
+                top: 5,
+                bottom: 5,
             },
             fixedWidth: 100
         }
         // add to screen
-        this.scoreLeft = this.add.text(300,150, this.score, scoreConfig);
+        this.scoreLeft = this.add.text(300, 150, this.score, scoreConfig);
 
-        // phone border
-        this.add.image(0,0, 'phone2').setOrigin(0,0);
-    }
+        // Difficulty progression
+        this.time.addEvent({
+            delay: 10000,
+            loop: true,
+            callback: () => {
+                this.maxMeatballs++;
+                this.meatSpeedMultiplier *= 1.1;
+                // update score
+                this.score += 1;
+                this.scoreLeft.text = this.score;
+            }
+        });
 
-    // Destroys the meatball that the bread has collided with
-    destroyMeatball() {
-        for(let meatball of this.meatballs.getChildren()) {
-            console.log(this.physics.world.overlap(this.bread, meatball));
-        }
-        this.resetBread();
-        // phone border over meatballs
-        this.add.image(0,0, 'phone2').setOrigin(0,0);
+        // Begin the soundtrack
+        this.soundtrack.play();
     }
 
     // Summons a new meatball at the top of the screen
     summonMeatball() {
         this.meatballs.add(new Meatball(this));
-        // phone border over meatball
-        this.add.image(0,0, 'phone2').setOrigin(0,0);
     }
 
     // Resets the bread's off-screen position
     resetBread() {
         this.breadFiring = false;
         this.bread.x = this.breadPos.x;
-        this.add.image(0,0, 'phone2').setOrigin(0,0);
         this.bread.y = this.breadPos.y;
     }
 
     // Handles what happens when the player hits a meatball
     gameEnd() {
         this.physics.world.pause();
+        this.soundtrack.stop();
         scoreEnd = this.score;
-        this.scene.start('end');    
+        this.scene.start('end');
         this.endOGame = true;
     }
 
@@ -177,13 +182,13 @@ class Play extends Phaser.Scene {
             if (keyUp.isDown) {
                 this.player.anims.play("shootAni", true);
             }
-            if(!keyRight.isDown && !keyLeft.isDown){
+            if ((!keyRight.isDown && !keyLeft.isDown) || (keyRight.isDown && keyLeft.isDown)) {
                 this.player.anims.play("idleAni", true);
             }
             this.player.setVelocityX(playerVelocity);
 
             // Bread reset
-            if(this.breadFiring && this.bread.y < -this.bread.displayHeight / 2 -100) {
+            if (this.breadFiring && this.bread.y < -this.bread.displayHeight / 2 - 100) {
                 this.resetBread();
             }
         }
