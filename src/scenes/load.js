@@ -33,7 +33,11 @@ class LoadScene extends Phaser.Scene {
         // bg
         this.load.image('background', './assets/bg.png');
         // scenes
-        this.load.image('menu', './assets/menu.png');
+        //this.load.image('menu', './assets/menu.png');
+        this.load.spritesheet('menu', './assets/menu_sheet.png', {
+            frameWidth: 540,
+            frameHeight: 960
+        });
         this.load.spritesheet('tutorial', './assets/tutorial_sheet.png', {
             frameWidth: 540,
             frameHeight: 960
