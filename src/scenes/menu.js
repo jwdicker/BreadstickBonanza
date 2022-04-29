@@ -12,24 +12,22 @@ class Menu extends Phaser.Scene {
         var menuConfig = {
             key: "menuAnimation",
             frames: this.anims.generateFrameNumbers("menu", {
-              start: 0,
-              end: 5,
-              first: 0
+                start: 0,
+                end: 5,
+                first: 0
             }),
             frameRate: 7,
             repeat: -1
-          };
-  
-          this.anims.create(menuConfig);
-          var menu = this.add.sprite(87, 110, "menu").play("menuAnimation");
-          menu.setOrigin(0,0);
-    }
+        };
 
-    update() {
+        this.anims.create(menuConfig);
+        var menu = this.add.sprite(87, 110, "menu").play("menuAnimation");
+        menu.setOrigin(0, 0);
+
         console.log("Menu");
 
-        if (Phaser.Input.Keyboard.JustDown(keyUp)) {
+        keyUp.on("down", () => {
             this.scene.start("tutorial");
-        }
+        });
     }
 }
