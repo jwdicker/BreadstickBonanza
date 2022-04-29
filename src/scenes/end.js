@@ -45,7 +45,7 @@ class End extends Phaser.Scene {
             fixedWidth: 100
         }
         // add to screen
-        scoreEnd = this.add.text(316, 647, this.score, scoreConfig);
+        scoreEnd = this.add.text(350, 615, this.score, scoreConfig);
 
         console.log("End");
         keyDown.on("down", () => {
