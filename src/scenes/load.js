@@ -42,7 +42,11 @@ class LoadScene extends Phaser.Scene {
             frameWidth: 540,
             frameHeight: 960
         });
-        this.load.image('end', './assets/end.png');
+        //this.load.image('end', './assets/end.png');
+        this.load.spritesheet('end', './assets/end_sheet.png', {
+            frameWidth: 540,
+            frameHeight: 960
+        });
         this.load.image('phone', './assets/phone.png');
         this.load.image('phone2', './assets/phone2.png');
         this.load.image('phone_edges', './assets/phone_edges.png');
