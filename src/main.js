@@ -1,6 +1,3 @@
-console.log("Foo");
-console.log("Bar");
-
 // Names:
 // Alexis Adolpho
 // Jacob Dickerman
@@ -12,6 +9,7 @@ console.log("Bar");
 // https://phaser.discourse.group/t/center-game-on-my-website/5921/3
 // https://github.com/nathanaltice/PaddleParkourP3
 // https://github.com/nathanaltice/MovementStudies
+// https://github.com/rndmcnlly/DDDDDD
 //
 // Creative Tilt:
 // technical - 
