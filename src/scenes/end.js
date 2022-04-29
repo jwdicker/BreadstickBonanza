@@ -6,6 +6,8 @@ class End extends Phaser.Scene {
     }
 
     create() {
+        keyDown = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.DOWN);
+
         console.log("scoreEnd: " + scoreEnd);
         this.score = scoreEnd;
         this.add.image(0, 0, 'phone').setOrigin(0, 0);
@@ -26,13 +28,10 @@ class End extends Phaser.Scene {
         }
         // add to screen
         scoreEnd = this.add.text(245, 600, this.score, scoreConfig);
-    }
 
-    update() {
         console.log("End");
-
-        if (Phaser.Input.Keyboard.JustDown(keyUp)) {
+        keyDown.on("down", () => {
             this.scene.start("play");
-        }
+        });
     }
 }
