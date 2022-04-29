@@ -104,16 +104,32 @@ class Play extends Phaser.Scene {
         // Collider setup
         this.physics.world.addCollider(this.player, this.border);
         this.physics.world.addOverlap(this.player, this.meatballs, this.gameEnd, null, this);
-        this.physics.world.addOverlap(this.bread, this.meatballs, (bread, meatball) => {
+        this.physics.world.addOverlap(this.bread, this.meatballs, (bread, meatball) => { 
             this.explosion.play();
             meatball.body = null;
-            meatball.alpha = 0;
+            this.tweens.add({
+                targets: meatball,
+                alpha: 0,
+                duration: 200
+            });
+            //meatball.alpha = 0;
             this.resetBread();
         }, null, this);
 
         // Scoring
         this.score = 1;
         // display
+        let waveConfig = {
+            fontFamily: 'Courier',
+            fontSize: '35px',
+            color: '#843605',
+            align: 'center',
+            padding: {
+                top: 5,
+                bottom: 5,
+            },
+            fixedWidth: 100
+        }
         let scoreConfig = {
             fontFamily: 'Courier',
             fontSize: '50px',
@@ -126,7 +142,8 @@ class Play extends Phaser.Scene {
             fixedWidth: 100
         }
         // add to screen
-        this.scoreLeft = this.add.text(300, 150, this.score, scoreConfig);
+        this.add.text(300, 125, "wave", waveConfig);
+        this.scoreLeft = this.add.text(300, 160, this.score, scoreConfig);
 
         // Difficulty progression
         this.time.addEvent({
