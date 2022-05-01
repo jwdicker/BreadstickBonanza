@@ -27,6 +27,7 @@ class Play extends Phaser.Scene {
         // Player setup
         this.player = this.physics.add.sprite(gameCanvasConfig.getCenter().x, 0, "idle").setOrigin(0.5);
         this.player.y = gameCanvasConfig.height + gameCanvasConfig.offset.y - this.player.displayHeight / 2 - UIDistance - 70;
+        this.player.body.setSize(this.player.displayWidth - 25, this.player.displayHeight - 25);
         this.player.setCollideWorldBounds(true);
         this.player.setDepth(1);
 
