@@ -12,7 +12,7 @@ class Play extends Phaser.Scene {
         keyUp = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP);
 
         // Adjusting physics bounds
-        this.physics.world.bounds.setTo(gameCanvasConfig.offset.x, gameCanvasConfig.offset.y, gameCanvasConfig.width, gameCanvasConfig.height);
+        this.physics.world.bounds.setTo(gameCanvasConfig.offset.x + 12.5, gameCanvasConfig.offset.y, gameCanvasConfig.width - 25, gameCanvasConfig.height);
 
         // phone border
         this.border = this.add.image(0, 0, 'phone2');
@@ -21,11 +21,13 @@ class Play extends Phaser.Scene {
 
         // Background setup
         this.background = this.add.tileSprite(gameCanvasConfig.offset.x, gameCanvasConfig.offset.y, gameCanvasConfig.width, gameCanvasConfig.height, "background").setOrigin(0, 0);
+        this.add.image(357, 595, 'floor');
         this.endOGame = false;
 
         // Player setup
         this.player = this.physics.add.sprite(gameCanvasConfig.getCenter().x, 0, "idle").setOrigin(0.5);
-        this.player.y = gameCanvasConfig.height + gameCanvasConfig.offset.y - this.player.displayHeight / 2 - UIDistance;
+        this.player.y = gameCanvasConfig.height + gameCanvasConfig.offset.y - this.player.displayHeight / 2 - UIDistance - 70;
+        this.player.body.setSize(this.player.displayWidth - 25, this.player.displayHeight - 25);
         this.player.setCollideWorldBounds(true);
         this.player.setDepth(1);
 
@@ -67,9 +69,9 @@ class Play extends Phaser.Scene {
         });
 
         // Audio Setup
-        this.soundtrack = this.sound.add("soundtrack", {loop: true, volume: 0.5});
-        this.explosion = this.sound.add("sfx_explode");
-        this.shoot = this.sound.add("sfx_bread");
+        this.soundtrack = this.sound.add("soundtrack", {loop: true, volume: 0.25});
+        this.explosion = this.sound.add("sfx_explode", {volume: 1.5});
+        this.shoot = this.sound.add("sfx_bread", {volume: 4});
 
         // Bread setup
         this.breadFiring = false;
@@ -103,16 +105,32 @@ class Play extends Phaser.Scene {
         // Collider setup
         this.physics.world.addCollider(this.player, this.border);
         this.physics.world.addOverlap(this.player, this.meatballs, this.gameEnd, null, this);
-        this.physics.world.addOverlap(this.bread, this.meatballs, (bread, meatball) => {
+        this.physics.world.addOverlap(this.bread, this.meatballs, (bread, meatball) => { 
             this.explosion.play();
             meatball.body = null;
-            meatball.alpha = 0;
+            this.tweens.add({
+                targets: meatball,
+                alpha: 0,
+                duration: 200
+            });
+            //meatball.alpha = 0;
             this.resetBread();
         }, null, this);
 
         // Scoring
         this.score = 1;
         // display
+        let waveConfig = {
+            fontFamily: 'Courier',
+            fontSize: '35px',
+            color: '#843605',
+            align: 'center',
+            padding: {
+                top: 5,
+                bottom: 5,
+            },
+            fixedWidth: 100
+        }
         let scoreConfig = {
             fontFamily: 'Courier',
             fontSize: '50px',
@@ -125,7 +143,8 @@ class Play extends Phaser.Scene {
             fixedWidth: 100
         }
         // add to screen
-        this.scoreLeft = this.add.text(300, 150, this.score, scoreConfig);
+        this.add.text(300, 125, "wave", waveConfig);
+        this.scoreLeft = this.add.text(300, 160, this.score, scoreConfig);
 
         // Difficulty progression
         this.time.addEvent({
@@ -161,7 +180,16 @@ class Play extends Phaser.Scene {
         this.physics.world.pause();
         this.soundtrack.stop();
         scoreEnd = this.score;
-        this.scene.start('end');
+        this.player.body = null;
+        // fade out death scene
+        this.tweens.add({
+            targets: this.player,
+            alpha: 0,
+            duration: 200
+        });
+        this.time.delayedCall(1000, () => {
+            this.scene.start('end', { fadeIn: true })
+        })
         this.endOGame = true;
     }
 
@@ -188,7 +216,7 @@ class Play extends Phaser.Scene {
             this.player.setVelocityX(playerVelocity);
 
             // Bread reset
-            if (this.breadFiring && this.bread.y < -this.bread.displayHeight / 2 - 100) {
+            if (this.breadFiring && this.bread.y < gameCanvasConfig.offset.y - this.bread.displayHeight) {
                 this.resetBread();
             }
         }

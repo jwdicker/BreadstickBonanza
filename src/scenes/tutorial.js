@@ -12,7 +12,7 @@ class Tutorial extends Phaser.Scene {
       keyLeft = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
       keyRight = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT);
 
-      var tutConfig = {
+      let tutConfig = {
          key: "tutAnimation",
          frames: this.anims.generateFrameNumbers("tutorial", {
             start: 0,
@@ -24,15 +24,27 @@ class Tutorial extends Phaser.Scene {
       };
 
       this.anims.create(tutConfig);
-      var tutorial = this.add.sprite(87, 110, "tutorial").play("tutAnimation");
+      let tutorial = this.add.sprite(87, 110, "tutorial").play("tutAnimation");
       tutorial.setOrigin(0, 0);
-   }
 
-   update() {
       console.log("Tutorial");
 
-      if (Phaser.Input.Keyboard.JustDown(keyUp) || Phaser.Input.Keyboard.JustDown(keyLeft) || Phaser.Input.Keyboard.JustDown(keyRight)) {
-         this.scene.start("play");
-      }
+      keyUp.on("down", () => {
+         this.startPlay();
+      });
+
+      keyLeft.on("down", () => {
+         this.startPlay();
+      });
+
+      keyRight.on("down", () => {
+         this.startPlay();
+      });
+   }
+
+   // Begins the play scene
+   startPlay() {
+      this.sound.play('sfx_select');
+      this.scene.start("play");
    }
 }

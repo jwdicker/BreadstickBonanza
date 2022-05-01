@@ -1,6 +1,3 @@
-console.log("Foo");
-console.log("Bar");
-
 // Names:
 // Alexis Adolpho
 // Jacob Dickerman
@@ -12,6 +9,7 @@ console.log("Bar");
 // https://phaser.discourse.group/t/center-game-on-my-website/5921/3
 // https://github.com/nathanaltice/PaddleParkourP3
 // https://github.com/nathanaltice/MovementStudies
+// https://github.com/rndmcnlly/DDDDDD
 //
 // Creative Tilt:
 // technical - 
@@ -30,10 +28,7 @@ const config = {
     zoom: 0.8,
     autoCenter: true,
     physics: {
-        default: "arcade",
-        arcade: {
-            debug: true
-        }
+        default: "arcade"
     },
     scene: [LoadScene, Menu, Tutorial, Play, End]
 };
@@ -60,10 +55,10 @@ const gameCanvasConfig = {
 let keyLeft, keyRight, keyUp, keyDown;
 
 // Score
-var scoreEnd = 0;
+let scoreEnd = 0;
 
 // Initialization Constants
-const UIDistance = game.config.height / 30;
+const UIDistance = gameCanvasConfig.height / 30;
 const bgMovementSpeed = 3;
 const startingMeatballs = 1;
 const meatballSpeed = 400;
