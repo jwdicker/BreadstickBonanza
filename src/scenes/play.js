@@ -12,7 +12,7 @@ class Play extends Phaser.Scene {
         keyUp = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP);
 
         // Adjusting physics bounds
-        this.physics.world.bounds.setTo(gameCanvasConfig.offset.x, gameCanvasConfig.offset.y, gameCanvasConfig.width, gameCanvasConfig.height);
+        this.physics.world.bounds.setTo(gameCanvasConfig.offset.x + 12.5, gameCanvasConfig.offset.y, gameCanvasConfig.width - 25, gameCanvasConfig.height);
 
         // phone border
         this.border = this.add.image(0, 0, 'phone2');
