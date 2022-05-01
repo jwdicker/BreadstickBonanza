@@ -30,8 +30,21 @@ class Tutorial extends Phaser.Scene {
       console.log("Tutorial");
 
       keyUp.on("down", () => {
-         this.sound.play('sfx_select');
-         this.scene.start("play");
+         this.startPlay();
       });
+
+      keyLeft.on("down", () => {
+         this.startPlay();
+      });
+
+      keyRight.on("down", () => {
+         this.startPlay();
+      });
+   }
+
+   // Begins the play scene
+   startPlay() {
+      this.sound.play('sfx_select');
+      this.scene.start("play");
    }
 }
