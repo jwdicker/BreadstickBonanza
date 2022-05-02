@@ -3,7 +3,7 @@
 // Jacob Dickerman
 // Grace Ho
 // 
-// Game: "Breadstick Bonanza" completed ?/?/22
+// Game: "Breadstick Bonanza" completed 5/1/22
 //
 // Sources: 
 // https://phaser.discourse.group/t/center-game-on-my-website/5921/3
