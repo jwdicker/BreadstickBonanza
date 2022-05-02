@@ -10,9 +10,24 @@
 // https://github.com/nathanaltice/PaddleParkourP3
 // https://github.com/nathanaltice/MovementStudies
 // https://github.com/rndmcnlly/DDDDDD
+// https://phaser.discourse.group/t/collider-callback-parameter-order/9817
 //
 // Creative Tilt:
-// technical - 
+// 
+// technical - Perhaps the biggest technical tilt in this game is the 
+// player's "breadstick defence," where the player can use their endless
+// breadsticks to stave off the meatball madness. This was challenging on
+// two fronts: the collision itself and the meatball spawning mechanics.
+// Since the meatballs were part of a group, isolating the particular one 
+// the breadstick hit required the use of parameters in the overlap callback
+// function, in which the main challenge was finding the documentation.
+// To make the meatballs evenly spaced, each meatball would recursively
+// summon another once they passed a certain point on the screen which was
+// dependant on the number of meatballs in play. However, to ensure this
+// still occurred after a meatball was hit, rather than just destroying a meatball
+// when it's hit, it just nulls its hitbox and zeros its alpha value.
+// In effect, the meatball is still there, just as a ghost.
+// 
 // visual - We interpreted 'endless runner' literally at first, 
 // by using 'olive garden endless breadsticks' as the starting point. 
 // That idea was expanded to have the player use the breadsticks 
