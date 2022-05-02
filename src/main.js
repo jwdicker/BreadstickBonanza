@@ -11,6 +11,12 @@
 // https://github.com/nathanaltice/MovementStudies
 // https://github.com/rndmcnlly/DDDDDD
 // https://phaser.discourse.group/t/collider-callback-parameter-order/9817
+// 
+// SFX Credits:
+// - Game theme: Cute music by Migfus20
+// - End theme: Short melancholic theme on piano by EKVelika
+// - Enemy Wave: Bell at Daitokuji Temple, Kyoto
+// - Sprite footsteps: Turnin' Tail by Zepurple
 //
 // Creative Tilt:
 // 
@@ -35,6 +41,13 @@
 // restaurant theme and had the player be a chef and the enemies be 
 // meatballs. Also, we named a number of things using alliteration 
 // (breadstick bonanza, meatball madness).
+//
+// sounds - We used "jsfxr - 8 bit sound" to create the sound effects for
+// shooting the bread and meatball collision with the bread. As for the other 
+// music files, we used "Freesound" to find our sound effects for other parts of our game, 
+// such as the background theme, enemy waves, sprite footsteps, sprite death, and end theme. 
+// We clipped and edited the pitch, tempo, speed, and bass for all music files to make them 
+// unique for our game.
 
 const config = {
     type: Phaser.CANVAS,
