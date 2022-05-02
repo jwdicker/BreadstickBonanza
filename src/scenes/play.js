@@ -69,12 +69,12 @@ class Play extends Phaser.Scene {
         });
 
         // Audio Setup
-        this.soundtrack = this.sound.add("soundtrack", {loop: true, volume: 0.25});
-        this.explosion = this.sound.add("sfx_explode", {volume: 1.5});
-        this.shoot = this.sound.add("sfx_bread", {volume: 4});
-        this.wave = this.sound.add("sfx_wave_inc", {loop: false, volume: 1});
-        this.death = this.sound.add("sfx_die", {volume: 1});
-        this.walk = this.sound.add("sfx_walk", {loop: true, volume: 1});
+        this.soundtrack = this.sound.add("soundtrack", { loop: true, volume: 0.25 });
+        this.explosion = this.sound.add("sfx_explode", { volume: 1.5 });
+        this.shoot = this.sound.add("sfx_bread", { volume: 4 });
+        this.wave = this.sound.add("sfx_wave_inc", { loop: false, volume: 1 });
+        this.death = this.sound.add("sfx_die", { volume: 1 });
+        this.walk = this.sound.add("sfx_walk", { loop: true, volume: 1 });
 
         // Bread setup
         this.breadFiring = false;
@@ -108,7 +108,7 @@ class Play extends Phaser.Scene {
         // Collider setup
         this.physics.world.addCollider(this.player, this.border);
         this.physics.world.addOverlap(this.player, this.meatballs, this.gameEnd, null, this);
-        this.physics.world.addOverlap(this.bread, this.meatballs, (bread, meatball) => { 
+        this.physics.world.addOverlap(this.bread, this.meatballs, (bread, meatball) => {
             this.explosion.play();
             meatball.body = null;
             this.tweens.add({
@@ -154,12 +154,14 @@ class Play extends Phaser.Scene {
             delay: 10000,
             loop: true,
             callback: () => {
-                this.wave.play();
-                this.maxMeatballs++;
-                this.meatSpeedMultiplier *= 1.1;
-                // update score
-                this.score += 1;
-                this.scoreLeft.text = this.score;
+                if (!this.endOGame) {
+                    this.wave.play();
+                    this.maxMeatballs++;
+                    this.meatSpeedMultiplier *= 1.1;
+                    // update score
+                    this.score += 1;
+                    this.scoreLeft.text = this.score;
+                }
             }
         });
 
@@ -203,29 +205,34 @@ class Play extends Phaser.Scene {
         if (!this.endOGame) {
             this.background.tilePositionY -= bgMovementSpeed;
 
-            // Player Movement
             let playerVelocity = 0;
-            if (keyLeft.isDown) {
-                this.player.anims.play("walkleftAni", true);
-                playerVelocity -= playerSpeed;
-            }
-            if (keyRight.isDown) {
-                this.player.anims.play("walkrightAni", true);
-                playerVelocity += playerSpeed;
-            }
             if (keyUp.isDown) {
+                // Players may not move while they're shooting
                 this.player.anims.play("shootAni", true);
-            }
-            if ((!keyRight.isDown && !keyLeft.isDown) || (keyRight.isDown && keyLeft.isDown)) {
-                this.player.anims.play("idleAni", true);
-            }
+            } else {
+                // Player Movement
+                if (keyLeft.isDown) {
+                    playerVelocity -= playerSpeed;
+                }
+                if (keyRight.isDown) {
+                    playerVelocity += playerSpeed;
+                }
 
-            if(playerVelocity != 0 && !this.walk.isPlaying) {
-                this.walk.play();
-            }
-            
-            if(playerVelocity == 0 && this.walk.isPlaying) {
-                this.walk.pause();
+                // Walking animations
+                if (playerVelocity != 0) {
+                    if (!this.walk.isPlaying) {
+                        this.walk.play();
+                    }
+
+                    if (playerVelocity < 0) {
+                        this.player.anims.play("walkleftAni", true);
+                    } else {
+                        this.player.anims.play("walkrightAni", true);
+                    }
+                } else {
+                    this.walk.pause();
+                    this.player.anims.play("idleAni", true);
+                }
             }
             this.player.setVelocityX(playerVelocity);
 
