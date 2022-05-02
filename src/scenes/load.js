@@ -23,6 +23,19 @@ class LoadScene extends Phaser.Scene {
             loadingBar.destroy();
         });
 
+        // Audio Loading
+        // Music
+        this.load.audio("endtrack", "assets/backgroundtheme.wav");
+        this.load.audio("soundtrack", "assets/cutetheme.mp3");
+        
+        // SFX
+        this.load.audio("sfx_bread", "assets/breadshot.wav");
+        this.load.audio("sfx_explode", "assets/explosion.wav");
+        this.load.audio("sfx_select", "assets/select.wav");
+        this.load.audio("sfx_die", "assets/chardeath.wav");
+        this.load.audio("sfx_walk", "assets/footsteps.wav");
+        this.load.audio("sfx_wave_inc", "assets/waves.wav");
+
         // Image & animation Loading
         // chef states
         this.load.spritesheet('idle', './assets/chef_idle.png', {
@@ -67,13 +80,6 @@ class LoadScene extends Phaser.Scene {
         // phone border
         this.load.image('phone', './assets/phone.png');
         this.load.image('phone2', './assets/phone2.png');
-
-        // Audio Loading
-        this.load.audio("endtrack", "assets/backgroundtheme.wav");
-        this.load.audio("soundtrack", "assets/cutetheme.mp3");
-        this.load.audio("sfx_bread", "assets/breadshot.wav");
-        this.load.audio("sfx_explode", "assets/explosion.wav");
-        this.load.audio("sfx_select", "assets/select.wav");
 
     }
 

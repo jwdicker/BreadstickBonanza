@@ -72,6 +72,9 @@ class Play extends Phaser.Scene {
         this.soundtrack = this.sound.add("soundtrack", {loop: true, volume: 0.25});
         this.explosion = this.sound.add("sfx_explode", {volume: 1.5});
         this.shoot = this.sound.add("sfx_bread", {volume: 4});
+        this.wave = this.sound.add("sfx_wave_inc", {loop: false, volume: 1});
+        this.death = this.sound.add("sfx_die", {volume: 1});
+        this.walk = this.sound.add("sfx_walk", {loop: true, volume: 1});
 
         // Bread setup
         this.breadFiring = false;
@@ -151,6 +154,7 @@ class Play extends Phaser.Scene {
             delay: 10000,
             loop: true,
             callback: () => {
+                this.wave.play();
                 this.maxMeatballs++;
                 this.meatSpeedMultiplier *= 1.1;
                 // update score
@@ -177,6 +181,8 @@ class Play extends Phaser.Scene {
 
     // Handles what happens when the player hits a meatball
     gameEnd() {
+        this.death.play();
+        this.walk.stop();
         this.physics.world.pause();
         this.soundtrack.stop();
         scoreEnd = this.score;
@@ -188,7 +194,7 @@ class Play extends Phaser.Scene {
             duration: 200
         });
         this.time.delayedCall(1000, () => {
-            this.scene.start('end', { fadeIn: true })
+            this.scene.start('end', { fadeIn: true });
         })
         this.endOGame = true;
     }
@@ -212,6 +218,14 @@ class Play extends Phaser.Scene {
             }
             if ((!keyRight.isDown && !keyLeft.isDown) || (keyRight.isDown && keyLeft.isDown)) {
                 this.player.anims.play("idleAni", true);
+            }
+
+            if(playerVelocity != 0 && !this.walk.isPlaying) {
+                this.walk.play();
+            }
+            
+            if(playerVelocity == 0 && this.walk.isPlaying) {
+                this.walk.pause();
             }
             this.player.setVelocityX(playerVelocity);
 
