@@ -49,23 +49,25 @@ class Play extends Phaser.Scene {
             }),
             repeat: -1
         });
-        this.anims.create({
-            key: "walkleftAni",
-            frameRate: 7,
-            frames: this.anims.generateFrameNumbers("walkleft", {
+        this.anims.create({ 
+            key: 'walkleft', 
+            frames: this.anims.generateFrameNames('chef_atlas', {      
+                prefix: 'walkleft',
                 start: 0,
-                end: 2
-            }),
-            repeat: -1
+                end: 2,
+            }), 
+            frameRate: 7,
+            repeat: -1 
         });
-        this.anims.create({
-            key: "walkrightAni",
-            frameRate: 7,
-            frames: this.anims.generateFrameNumbers("walkright", {
+        this.anims.create({ 
+            key: 'walkright', 
+            frames: this.anims.generateFrameNames('chef_atlas', {      
+                prefix: 'walkright',
                 start: 0,
-                end: 2
-            }),
-            repeat: -1
+                end: 2,
+            }), 
+            frameRate: 7,
+            repeat: -1 
         });
 
         // Audio Setup
@@ -225,9 +227,9 @@ class Play extends Phaser.Scene {
                     }
 
                     if (playerVelocity < 0) {
-                        this.player.anims.play("walkleftAni", true);
+                        this.player.anims.play('walkleft', true);
                     } else {
-                        this.player.anims.play("walkrightAni", true);
+                        this.player.anims.play('walkright', true);
                     }
                 } else {
                     this.walk.pause();

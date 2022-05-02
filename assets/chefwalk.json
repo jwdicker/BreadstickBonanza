@@ -1,0 +1,7 @@
+{"frames":{"walkleft3":{"frame":{"x":0,"y":0,"w":70,"h":136},"rotated":false,"trimmed":false,"spriteSourceSize":{"x":0,"y":0,"w":70,"h":136},"sourceSize":{"w":70,"h":136}},
+"walkleft2":{"frame":{"x":71,"y":0,"w":70,"h":136},"rotated":false,"trimmed":false,"spriteSourceSize":{"x":0,"y":0,"w":70,"h":136},"sourceSize":{"w":70,"h":136}},
+"walkleft1":{"frame":{"x":142,"y":0,"w":70,"h":136},"rotated":false,"trimmed":false,"spriteSourceSize":{"x":0,"y":0,"w":70,"h":136},"sourceSize":{"w":70,"h":136}},
+"walkright3":{"frame":{"x":0,"y":137,"w":70,"h":136},"rotated":false,"trimmed":false,"spriteSourceSize":{"x":0,"y":0,"w":70,"h":136},"sourceSize":{"w":70,"h":136}},
+"walkright2":{"frame":{"x":71,"y":137,"w":70,"h":136},"rotated":false,"trimmed":false,"spriteSourceSize":{"x":0,"y":0,"w":70,"h":136},"sourceSize":{"w":70,"h":136}},
+"walkright1":{"frame":{"x":142,"y":137,"w":70,"h":136},"rotated":false,"trimmed":false,"spriteSourceSize":{"x":0,"y":0,"w":70,"h":136},"sourceSize":{"w":70,"h":136}}},
+"meta":{"app":"https://www.leshylabs.com/apps/sstool/","version":"Leshy SpriteSheet Tool v0.8.4","image":"chefwalk.png","size":{"w":212,"h":273},"scale":1}}

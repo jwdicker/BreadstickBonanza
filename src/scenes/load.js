@@ -38,6 +38,8 @@ class LoadScene extends Phaser.Scene {
 
         // Image & animation Loading
         // chef states
+        this.load.atlas('chef_atlas', 'assets/chefwalk.png', 'assets/chefwalk.json');
+
         this.load.spritesheet('idle', './assets/chef_idle.png', {
             frameWidth: 77,
             frameHeight: 137
@@ -46,15 +48,7 @@ class LoadScene extends Phaser.Scene {
             frameWidth: 70,
             frameHeight: 136
         });
-        this.load.spritesheet('walkleft', './assets/walkleft_sheet.png', {
-            frameWidth: 70,
-            frameHeight: 136
-        });
-        this.load.spritesheet('walkright', './assets/walkright_sheet.png', {
-            frameWidth: 70,
-            frameHeight: 136
-        });
-
+ 
         // items
         this.load.image('meatball', './assets/meatball.png');
         this.load.image('breadstick', './assets/breadstick.png');
